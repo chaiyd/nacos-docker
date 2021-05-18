@@ -2,7 +2,7 @@ FROM alpine AS builder
 
 MAINTAINER chaiyd "chaiyd.cn@gmail.com"
 
-ARG NACOS_VERSION=2.0.0
+ARG NACOS_VERSION=2.0.1
 
 RUN wget https://github.com/alibaba/nacos/releases/download/${NACOS_VERSION}/nacos-server-${NACOS_VERSION}.tar.gz -P /home
 RUN tar -xzvf /home/nacos-server-${NACOS_VERSION}.tar.gz -C /home \
@@ -34,7 +34,7 @@ ENV MODE="cluster" \
     NACOS_DEBUG="n" \
     TOMCAT_ACCESSLOG_ENABLED="false"
 
-ARG NACOS_VERSION=2.0.0
+ARG NACOS_VERSION=2.0.1
 
 WORKDIR /$BASE_DIR
 
