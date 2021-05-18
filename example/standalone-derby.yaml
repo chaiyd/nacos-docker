@@ -1,7 +1,7 @@
 version: "2"
 services:
   nacos:
-    image: chaiyd/nacos-server:${NACOS_VERSION}
+    image: chaiyd/nacos:${NACOS_VERSION}
     container_name: nacos-standalone
     environment:
     - PREFER_HOST_MODE=hostname
