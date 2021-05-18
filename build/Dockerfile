@@ -2,12 +2,9 @@ FROM alpine AS builder
 
 MAINTAINER chaiyd "chaiyd.cn@gmail.com"
 
-ARG NACOS_VERSION=2.0.0
+ARG NACOS_VERSION=2.0.1
 
-#RUN wget https://github.com/alibaba/nacos/releases/download/${NACOS_VERSION}/nacos-server-${NACOS_VERSION}.tar.gz -P /home
-# bugfix
-RUN wget https://github.com/alibaba/nacos/releases/download/2.0.0-bugfix/nacos-server-2.0.0.tar.gz -P /home
-
+RUN wget https://github.com/alibaba/nacos/releases/download/${NACOS_VERSION}/nacos-server-${NACOS_VERSION}.tar.gz -P /home
 RUN tar -xzvf /home/nacos-server-${NACOS_VERSION}.tar.gz -C /home \
     && rm -rf /home/nacos-server-${NACOS_VERSION}.tar.gz /home/nacos/bin/* /home/nacos/conf/*.properties /home/nacos/conf/*.example /home/nacos/conf/nacos-mysql.sql
 
