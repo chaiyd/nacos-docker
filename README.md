@@ -23,7 +23,7 @@ This project contains a Docker image meant to facilitate the deployment of [Naco
 ## Quick Start
 
 ```shell
-docker run --name nacos-quick -e MODE=standalone -p 8849:8848 -d nacos/nacos-server:2.0.0-bugfix
+docker run --name nacos-quick -e MODE=standalone -p 8849:8848 -d nacos/nacos-server:2.0.1
 ```
 
 
@@ -32,7 +32,7 @@ docker run --name nacos-quick -e MODE=standalone -p 8849:8848 -d nacos/nacos-ser
 * Tips: You can change the version of the Nacos image in the compose file from the following configuration.
 `example/.env`
 ```dotenv
-NACOS_VERSION=2.0.0-bugfix
+NACOS_VERSION=2.0.1
 ```
 
 Run the following command：
@@ -115,7 +115,7 @@ Run the following command：
 | MYSQL_SERVICE_USER | username of  database |  |
 | MYSQL_SERVICE_PASSWORD | password of  database |  |
 | MYSQL_DATABASE_NUM      | It indicates the number of database             | default :**1**                      |
-| MYSQL_SERVICE_DB_PARAM      | Database url parameter             | default : **characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true**                      |
+| MYSQL_SERVICE_DB_PARAM      | Database url parameter             | default : **characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false**                      |
 | JVM_XMS      |  -Xms             | default :1g                          |
 | JVM_XMX      |  -Xmx            | default :1g                          |
 | JVM_XMN      |  -Xmn           | default :512m                          |
