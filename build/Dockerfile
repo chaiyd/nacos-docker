@@ -33,7 +33,7 @@ ENV MODE="cluster" \
 
 RUN apt update \
     && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime \
-    && echo -e $TIME_ZONE > /etc/timezone
+    && echo $TIME_ZONE > /etc/timezone
 
 ARG NACOS_VERSION=2.0.1
 ARG HOT_FIX_FLAG=""
