@@ -12,10 +12,6 @@ FROM mcr.microsoft.com/java/jdk:8-zulu-debian10
 
 MAINTAINER chaiyd "chaiyd.cn@gmail.com"
 
-RUN apt update \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone
-
 # set environment
 ENV MODE="cluster" \
     PREFER_HOST_MODE="ip"\
@@ -26,15 +22,21 @@ ENV MODE="cluster" \
     #JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
     NACOS_USER="nacos" \
     JAVA="/usr/bin/java" \
-    JVM_XMS="2g" \
-    JVM_XMX="2g" \
-    JVM_XMN="1g" \
+    JVM_XMS="1g" \
+    JVM_XMX="1g" \
+    JVM_XMN="512m" \
     JVM_MS="128m" \
     JVM_MMS="320m" \
     NACOS_DEBUG="n" \
     TOMCAT_ACCESSLOG_ENABLED="false"
+    TIME_ZONE="Asia/Shanghai"
+
+RUN apt update \
+    && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime \
+    && echo -e $TIME_ZONE > /etc/timezone
 
 ARG NACOS_VERSION=2.0.1
+ARG HOT_FIX_FLAG=""
 
 WORKDIR /$BASE_DIR
 
@@ -43,7 +45,6 @@ COPY --from=builder /home/nacos/ /home/nacos/
 ADD bin/docker-startup.sh bin/docker-startup.sh
 ADD conf/application.properties conf/application.properties
 ADD init.d/custom.properties init.d/custom.properties
-
 
 # set startup log dir
 RUN mkdir -p logs \
