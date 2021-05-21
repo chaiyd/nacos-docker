@@ -1,0 +1,49 @@
+version: "3"
+services:
+  nacos:
+    image: chaiyd/nacos:2.0.1
+    container_name: nacos
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql # nacos 不支持utf8mb4
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=password
+    depends_on:
+      - mysql
+    volumes:
+      - ./log/nacos:/home/nacos/logs
+      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "8848:8848"
+    restart: always
+  mysql:
+    image: chaiyd/mysql:8.0.25
+    container_name: mysql
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+      - ./init.d/mysql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3306:3306"
+    restart: always
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus-standalone.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - nacos
+    restart: on-failure
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    restart: on-failure
