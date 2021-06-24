@@ -1,7 +1,7 @@
 version: "3"
 services:
   nacos:
-    image: chaiyd/nacos:2.0.1
+    image: chaiyd/nacos:2.0.2
     container_name: nacos
     environment:
       - MODE=standalone

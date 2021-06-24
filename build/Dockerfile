@@ -2,7 +2,7 @@ FROM alpine AS builder
 
 MAINTAINER chaiyd "chaiyd.cn@gmail.com"
 
-ARG NACOS_VERSION=2.0.1
+ARG NACOS_VERSION=2.0.2
 
 RUN wget https://github.com/alibaba/nacos/releases/download/${NACOS_VERSION}/nacos-server-${NACOS_VERSION}.tar.gz -P /home
 RUN tar -xzvf /home/nacos-server-${NACOS_VERSION}.tar.gz -C /home \
@@ -35,7 +35,7 @@ RUN apt update \
     && cp /usr/share/zoneinfo/$TIME_ZONE /etc/localtime \
     && echo $TIME_ZONE > /etc/timezone
 
-ARG NACOS_VERSION=2.0.1
+ARG NACOS_VERSION=2.0.2
 ARG HOT_FIX_FLAG=""
 
 WORKDIR /$BASE_DIR
